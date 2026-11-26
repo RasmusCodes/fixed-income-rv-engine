@@ -1,0 +1,11 @@
+# data: raw downloads, user-downloaded files, processed panels (rebuild with scripts/)
+/data/
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# run logs
+/research/logs/
+# local scratch
+/scratch/

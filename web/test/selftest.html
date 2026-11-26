@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>firv.js self-test</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 24px; background: #fcfcfb; color: #0b0b0b; }
+  td, th { padding: 3px 10px; border-bottom: 1px solid #e1e0d9; text-align: left; }
+  .fail { color: #b42318; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1 id="summary">running</h1>
+<table><thead><tr><th>check</th><th>python</th><th>javascript</th><th>diff</th><th>tolerance</th><th>result</th></tr></thead><tbody id="rows"></tbody></table>
+<script src="../firv.js"></script>
+<script src="golden.js"></script>
+<script src="checks.js"></script>
+<script>
+(function () {
+  const rows = window.runChecks(window.FIRV, window.GOLDEN);
+  const tb = document.getElementById('rows');
+  for (const r of rows) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.name}</td><td>${r.py}</td><td>${r.js}</td><td>${typeof r.diff === 'number' ? r.diff.toExponential(2) : r.diff}</td><td>${r.tol}</td><td class="${r.ok ? '' : 'fail'}">${r.ok ? 'pass' : 'FAIL'}</td>`;
+    tb.appendChild(tr);
+  }
+  const n = rows.filter((r) => r.ok).length;
+  document.getElementById('summary').textContent = `SELFTEST ${n === rows.length ? 'PASS' : 'FAIL'} ${n}/${rows.length}`;
+  document.title = document.getElementById('summary').textContent;
+})();
+</script>
+</body>
+</html>

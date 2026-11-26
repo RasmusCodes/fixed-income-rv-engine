@@ -1,0 +1,3 @@
+-r requirements.txt
+# reads the PDF printed by scripts/run_js_selftest.ps1
+pypdf==7.1.1
